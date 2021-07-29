@@ -1,0 +1,179 @@
+
+
+## 创建型设计模式
+
+### 工厂模式
+
+### 单例模式
+
+特点：
+
+1. **只有一个实例对象** 
+2. **单例对象必须由单例类自行创建**
+3. **单例类对外提供一个访问该单例的全局访问点**
+
+懒汉式：
+
+```java
+public class LazySingleton {
+    private static volatile LazySingleton instance;
+    private LazySingleton() {
+        
+    }
+    public static synchronized LazySingleton getInstance() {
+        if (instance == null) {
+            instance = new LazySingleton();
+        }
+        return instance;
+    }
+}
+```
+
+饿汉式
+
+```java
+public class HungrySingleton {
+    private static final HungrySingleton instance = new HungrySingleton();
+    
+    private HungrySingleton() {
+        
+    }
+    
+    public static getInstance() {
+        return instance;
+    }
+}
+
+```
+
+双重检查锁
+
+```java
+public class DoubleCheck {
+    private static volatile instance ;
+    private DoubleCheck() {
+        
+    }
+    public static getInstance() {
+        if (instance == null) {
+            synchronized(DoubleCheck.class) {
+                if (instance == null) {
+                    instance = new DoubleCheck();
+                }
+            }
+        }
+        return instance;
+    }
+}
+```
+
+
+
+
+
+### 原型模式      
+
+**角色：**
+
+Client 
+
+Prototype
+
+Concrete Prototype
+
+用一个已经创建的实例作为原型，复制出和原型相同或相似的对象
+
+**优点：**
+
+Java实现原型模式根据内存二进制流，比直接new性能更好
+
+可以用深拷贝方式保存对象的状态，以便在后续需要的时候，辅助实现撤销操作。
+
+**缺点：**
+
+需要为每个类都配置一个clone方法
+
+clone方法位于类的内部，如果需要对类改造时，需要修改代码，违反了开闭原则
+
+当深克隆的时候需要编写复杂代码，特别是当存在多重嵌套引用的时候，每个对象都需要深拷贝。
+
+**使用：**
+
+通过实现Java的Cloneable接口并使用Clone方法(浅拷贝)
+
+**场景：**
+
+1. 对象之间相同或者相似，只有个别属性不同时
+2. 创建对象成本太大时
+3. 创建一个对象需要繁琐的数据准备和访问权限
+4. 大量使用该类对象，并且各个调用者都要给属性重新赋值时
+
+### 建造者模式
+
+## 结构性设计模式
+
+### 代理模式
+
+定义： 给某个对象提供一个代理对象，由代理对象控制对原对象的使用。
+
+角色：
+
+**抽象主题角色**：定义了目标对象和代理对象的公共接口，这样在任何可以使用目标对象的地方就可以使用代理对象。
+
+**具体主题角色：**被代理的对象
+
+**代理主题角色：**代理对象内部有被代理对象的引用，因此可以在任何时候操作被代理对象，代理对象提供一个与目标对象相同的接口，因此可以在任何地方替换目标对象，代理对象通常在客户端调用传递给目标对象之前或者之后执行操作。
+
+
+
+分类：
+
+**静态代理：**
+
+由程序员创建再编译。
+
+优点：可以在符合开闭原则的情况下对目标对象进行功能扩展
+
+缺点：需要为每个服务都创建一个代理类，工作量大，此外一旦接口发生改变，代理类也得修改。
+
+**动态代理：**
+
+JDK动态代理通过反射机制动态创建
+
+CGLIB动态代理通过继承创建
+
+### 适配器模式
+
+### 桥接模式
+
+### 装饰模式
+
+### 外观模式
+
+### 享元模式
+
+### 组合模式
+
+## 行为型设计模式
+
+### 模板方法
+
+### 策略
+
+### 命令
+
+### 职责链
+
+### 状态
+
+### 观察者
+
+### 中介
+
+###  迭代器
+
+### 访问者
+
+### 备忘录
+
+### 解释器
